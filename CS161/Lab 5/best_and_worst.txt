@@ -1,0 +1,31 @@
+For Heart Disease
+
+
+        lowest is: ['Minnesota', 129.8]
+        highest is: ['Mississippi', 266.5]
+
+        For Motor Vehicle Death Rate
+
+
+        lowest is: ['District of Columbia', 4.84]
+        highest is: ['Wyoming', 24.62]
+
+        For Teen Birth Rate
+
+
+        lowest is: ['New Hampshire', 16.4]
+        highest is: ['Mississippi', 64.2]
+
+        For Adult Smoking
+
+
+        lowest is: ['Utah', 9.1]
+        highest is: ['West Virginia', 26.8]
+
+        For Adult Obesity
+
+
+        lowest is: ['Colorado', 21.4]
+        highest is: ['Mississippi', 34.5]
+
+        
