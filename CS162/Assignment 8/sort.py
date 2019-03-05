@@ -1,4 +1,4 @@
-from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED
+from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry
 import time
 import random
 root=Tk()
@@ -23,8 +23,6 @@ def change_color(bar):
         Suggested for changing the color in real time, but does not work the way I want it to. 
     """
     window.itemconfig(bar, fill='black')
-
-
 
 def Swap(main_list,x,y):
     """
@@ -84,13 +82,7 @@ for i in range(100):
     main_list.append(random_num)
 
 
-    """
-    Creates a button, I plan on fixing this up so it actually starts the whole problem but for now
-    it doesnt do anything. 
-    """
 
-
-    
 if __name__ == "__main__":  
     Selection(main_list)
     end = Message(fframe, text= "All done",width= 100, relief= RAISED, background="lightgreen")
