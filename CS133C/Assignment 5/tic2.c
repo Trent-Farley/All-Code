@@ -1,15 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>   
+#include<string.h> 
+#include<stdlib.h>
+#include <ctype.h>
+#include <stdbool.h>
+
+int exit_the_game();
+//for exiting the game, yes I did copy it from the last one
 void print_stats(char tic[3][3]);
+// finally put the board printing into its own function
 int check_win(char tic[3][3],char place,int i);
+// check win is all the win logic.
 
 void main(){
     char tic[3][3];
     char place;
     int x,y,i;
-    int playing = 1;
-
-    while(playing == 1){
+    // tic is a 2 dimensional array, place is postion and x,y,i are 
+    // counting variables.
+    while(true){
+        //creation of the two dimmensional array.
         for(i=0;i<3;i++){
             tic[i][0]=' ';
             tic[i][1]=' ';
@@ -21,7 +30,7 @@ void main(){
         printf("Player 1 is X, Player 2 is O.\n");
 
         for(i=0;i<9;i++){
-
+            //more mod fun!
             if(i%2==0){
                 place = 'X';
                 printf("Player 1 please enter a x coordinate to place a X\n");
@@ -38,7 +47,7 @@ void main(){
                 scanf("%d",&y);
                 system("@cls||clear");
             }
-            
+            // the super secret formula 
             if(tic[y-1][x-1]==' '){
                 tic[y-1][x-1] = place;
             }
@@ -46,21 +55,17 @@ void main(){
                 printf("Please select a valid square.\n");
                 i--;
             }
-            
+            //error checking and status 
             print_stats(tic);
 
-            int won = check_win(tic,place,i);
-            if(won==1){
-                break;
-            }
+            check_win(tic,place,i);
         }
-    printf("Would you like to play again?[y=1/n=0]\n");
-    scanf("%d",&playing);
     system("@cls||clear");
     }
 }
 
 void print_stats(char tic[3][3]){
+    /* Print board */
         printf("Current tic\n\n\
         1  |  2  |  3\n\
     1   %c  |  %c  |  %c\n\
@@ -74,26 +79,47 @@ void print_stats(char tic[3][3]){
 }
 
 int check_win(char tic[3][3],char place,int i){
+    //win logic except easier since there is 
+    //information more easily accessed. 
     for(i=0;i<3;i++){
         if(tic[i][0]==tic[i][1]&&\
         tic[i][1]==tic[i][2]&&\
         tic[i][0]==place){
-            printf("%c's Win!!!\n", place);
-            return 1;
+            printf("%c's win!!!\n", place);
+            exit_the_game();
         }
         else if(tic[0][i]==tic[1][i]&&\
         tic[1][i]==tic[2][i]&&\
         tic[0][i]==place){
-            printf("%c's Win!!!\n", place);
-            return 1;
+            printf("%c's win!!!\n", place);
+            exit_the_game();
         }
         }
         if(tic[0][0]==tic[1][1]&&tic[1][1]==tic[2][2]&&tic[0][0]==place){
-            printf("%c's Win!!!\n", place);
-            return 1;
+            printf("%c's win!!!\n", place);
+            exit_the_game(); 
         }
         else if(tic[2][0]==tic[1][1]&&tic[1][1]==tic[0][2]&&tic[2][0]==place){
-            printf("%c's Win!!!\n", place);
-            return 1;
+            printf("%c's win!!!\n", place);
+            exit_the_game();
         }
+}
+int exit_the_game()
+// Function to end the game
+{
+    char exiting;
+    printf("\n\n Would you like to exit [y/n] \n :::  ");
+    getchar();//buffer eater
+    scanf("%c",&exiting);
+ 
+    toupper(exiting);
+    // So it doesnt print this, but for some reason is required 
+    // for exiting. 
+    printf("%s",exiting);
+
+    if(strcmp(&exiting, "Y") == 0)
+    {
+        exit(0);
+    }
+    return 0;  
 }
