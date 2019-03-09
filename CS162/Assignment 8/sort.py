@@ -1,18 +1,19 @@
-from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry
+from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry, StringVar, Event
 import time
 import random
-root=Tk()
 global window
-global fframe
+global frame
+global root
+root=Tk()
 root.geometry(newGeometry="1050x600")
-fframe = Frame(root, width = 1050, height=600)
-window = Canvas(fframe, width=1050,height=500,borderwidth=1,background='lightblue',relief='raised')
+frame = Frame(root, width = 1050, height=600)
+window = Canvas(frame, width=1050,height=500,borderwidth=1,background='lightblue',relief='raised')
 
 
-def Button_Click(event): 
+def Button_Click(Event): 
     window.pack()
     window.update()
-    fframe.pack()
+    frame.pack()
 
 button = Button(root ,text="Start")  
 button.pack(side=TOP)
@@ -58,20 +59,32 @@ def Selection(main_list):
         This is the main functio for swapping and showing the bars moving, calls anmation(that creates bars) 
         and also calls swap. 
     """
-
     for i in range(len(main_list)):
-            
+        min=i
 
-            min=i
+        for j in range(i+1,len(main_list)):
+            if(main_list[min]>main_list[j]):
+                min=j
 
-            for j in range(i+1,len(main_list)):
+        animation(main_list[min], main_list[i])
+        Swap(main_list,min,i)
 
-                if(main_list[min]>main_list[j]):
+def Search_button(event):
+    print(search_num.get())
 
-                    min=j
-
-            animation(main_list[min], main_list[i])
-            Swap(main_list,min,i)
+def Search(main_list):
+    label_string = StringVar()
+    label_string.set("Enter value ")
+    
+    search_num = Entry(frame,text = label_string)
+    button = Button(root, text="Start Search")
+    search_num.pack()
+    button.pack()
+    button.bind("<1>",Search_button)
+    
+    label_string.set(search_num.get())
+    print(search_num.get())
+   
 
 
 # &&  Generate random heights  && ##
@@ -85,7 +98,8 @@ for i in range(100):
 
 if __name__ == "__main__":  
     Selection(main_list)
-    end = Message(fframe, text= "All done",width= 100, relief= RAISED, background="lightgreen")
+    end = Message(frame, text= "All done",width= 100, relief= RAISED, background="lightgreen")
     end.pack()
+    Search(main_list)
     root.mainloop()
 
