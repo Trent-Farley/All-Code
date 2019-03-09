@@ -81,7 +81,6 @@ def Search(main_list):
     search_num.pack()
     button.pack()
     button.bind("<1>",Search_button)
-    
     label_string.set(search_num.get())
     print(search_num.get())
    
