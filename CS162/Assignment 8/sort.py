@@ -1,4 +1,5 @@
-from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry, StringVar, Event
+from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry, \
+StringVar, Event, Misc
 import time
 import random
 global window
@@ -69,8 +70,10 @@ def Selection(main_list):
         animation(main_list[min], main_list[i])
         Swap(main_list,min,i)
 
-def Search_button(event):
+def Search_button(Event, label_string, search_num):
+    label_string.set(search_num.get())
     print(search_num.get())
+    print("Button click")
 
 def Search(main_list):
     label_string = StringVar()
@@ -78,11 +81,12 @@ def Search(main_list):
     
     search_num = Entry(frame,text = label_string)
     button = Button(root, text="Start Search")
-    search_num.pack()
+
+    button.bind("<1>",Search_button(Event,label_string,search_num))
     button.pack()
-    button.bind("<1>",Search_button)
-    label_string.set(search_num.get())
-    print(search_num.get())
+    search_num.pack()
+    # label_string.set(search_num.get())
+    # print(search_num.get())
    
 
 
@@ -96,7 +100,7 @@ for i in range(100):
 
 
 if __name__ == "__main__":  
-    Selection(main_list)
+   # Selection(main_list)
     end = Message(frame, text= "All done",width= 100, relief= RAISED, background="lightgreen")
     end.pack()
     Search(main_list)
