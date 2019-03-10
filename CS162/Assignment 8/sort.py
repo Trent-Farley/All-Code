@@ -80,11 +80,9 @@ def Search(main_list):
     button = Button(root, text="Start Search")
     search_num.pack()
     button.pack()
-    button.bind("<1>",Search_button)
+    button.bind("<ButtonPress-1>", Search_button)
     label_string.set(search_num.get())
     print(search_num.get())
-   
-
 
 # &&  Generate random heights  && ##
 main_list = []    
