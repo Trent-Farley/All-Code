@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 int check_win(char *tic,char place,int i);
 int exit_the_game(char*(tic));
 //for exiting the game, yes I did copy it from the last one
@@ -12,11 +13,17 @@ void main(){
     char* tic;
     char place;
     int x,y,i,position;
-    //create allocation for the size of 9 
-    tic = calloc(9, sizeof(char));
+    char replay = 'y';
+    unsigned ex_state = 1;
 
-    while(true){
-        //True b/c I have an exit function to end the while loop
+
+    while(replay != 'n'){
+
+        do{
+
+        //create allocation for the size of 9 
+        tic = calloc(9, sizeof(char));
+
         for(i=0;i<9;i++){
             //super easy way of doing things... love me 
             //some dynamic memory!
@@ -52,14 +59,17 @@ void main(){
                 printf("Please select a valid square.\n");
                 i--;//error checking
             }
-            check_win((tic),place,i);
-            
             print_stats((tic));
-
+            ex_state = check_win((tic),place,i);
 
         }
-    }
-}
+        }while(ex_state == 1);
+            
+            printf("Would you like to play again?");
+            
+            scanf("%c",&replay);
+            getchar();
+}}
 void print_stats(char*(tic)){
     /* Prints the stats of the game */
         printf("State of the game:\n\n\
@@ -67,7 +77,7 @@ void print_stats(char*(tic)){
         1   %c  |  %c  |  %c\n\
         -------|-----|-------\n\
         2   %c  |  %c  |  %c\n\
-        -------|-----|-------\n\
+        -------|-----|---------\n\
         3   %c  |  %c  |  %c\n\n",
         *(tic+0),*(tic+1),*(tic+2),
         *(tic+3),*(tic+4),*(tic+5),
@@ -83,23 +93,24 @@ int check_win(char *tic,char place,int i){
             if( tic[count+0] == tic[count+1] && tic[count+1] ==tic[count+2] \
             && tic[count+0]==place){
                 printf("%c's have won \n\n",place);
-                exit_the_game((tic));
+                
+                return 26;
             }
             else if(tic[j+0]==tic[j+3]&& tic[j+3]==tic[j+6]&&tic[j+0]==place){
                 printf("%c's have won \n\n",place);
-                exit_the_game((tic));
+                return 26;
             }
             count+=3;
     }
     //diagonal win logic
     if(tic[0]==tic[4]&&tic[4]==tic[8]&&tic[0]==place){
         printf("%c's have won!!!\n",place);
-        exit_the_game((tic));
+        return 26;
         
     }
     if(tic[6]==tic[4]&&tic[4]==tic[2]&&tic[6]==place){
         printf("%c's have won!!!\n",place);
-        exit_the_game((tic));
+        return 26;
     }
 }
 int exit_the_game(char*(tic))
@@ -108,9 +119,8 @@ int exit_the_game(char*(tic))
     char exiting;
     printf("\n\n Would you like to exit [y/n] \n :::  ");
     getchar();//buffer eater
-    scanf("%c",&exiting);
- 
-    toupper(exiting);
+    exiting = getchar();
+    //scanf("%c",&exiting);
     // So it doesnt print this, but for some reason is required 
     // for exiting. 
     printf("%s",exiting);

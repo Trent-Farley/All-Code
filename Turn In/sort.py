@@ -6,7 +6,7 @@ import time
 from tkinter import (ALL, LEFT, RAISED, TOP, Button, Canvas, Entry, Event,
                      Frame, Label, Message, StringVar, Tk,BOTTOM)
 
-global main_list
+                     
 global enter
 root=Tk()
 root.geometry(newGeometry="1250x600")
@@ -101,7 +101,7 @@ for i in range(100):
     random_ = random.randint(1,5)
     random_num = random.randint(0,60)*(10/random_)/20 +(2)
     int(random_num)
-    
+
     main_list.append(random_num)
 
 
