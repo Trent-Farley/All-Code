@@ -76,12 +76,10 @@ def animation(min,i):
     window.update()
 
 def Selection(main_list):
-    
     """
         This is the main functio for swapping and showing the bars moving, calls anmation(that creates bars) 
         and also calls swap. 
     """
-
     for i in range(len(main_list)):
         min=i
 
@@ -100,9 +98,6 @@ for i in range(100):
     random_num = random.randint(0,60)*(10/random_)/20 +(2)
     main_list.append(random_num)
 
-
 print(f"Here is the list for easy look at search: \n{main_list}")
-
-
 
 root.mainloop()
