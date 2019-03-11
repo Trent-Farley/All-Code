@@ -1,29 +1,41 @@
-from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry, StringVar, Event
-import time
 import random
-global window
-global frame
-global root
+import time
+from tkinter import (ALL, LEFT, RAISED, TOP, Button, Canvas, Entry, Event,
+                     Frame, Label, Message, StringVar, Tk,BOTTOM)
+
+global main_list
+global enter
 root=Tk()
-root.geometry(newGeometry="1050x600")
-frame = Frame(root, width = 1050, height=600)
+root.geometry(newGeometry="1250x600")
+root.title("Search and Sort")
+frame = Frame(root, width = 1150, height=600)
 window = Canvas(frame, width=1050,height=500,borderwidth=1,background='lightblue',relief='raised')
 
+
+enter = Entry(root)
+enter.pack(side=LEFT)
 
 def Button_Click(Event): 
     window.pack()
     window.update()
     frame.pack()
+    Selection(main_list)
 
-button = Button(root ,text="Start")  
-button.pack(side=TOP)
-button.bind('<ButtonPress-1>', Button_Click)
 
-def change_color(bar):
+button = Button(root, text="Search & Sort")
+button.pack(side=LEFT)
+button.bind("<ButtonPress-1>",Button_Click)
+
+mess = Message(root, text="Ok, the pink bar is the value searched for" )
+mess.config(bg='lightgreen', font=('times', 14, 'italic'),width = 500 )
+mess.pack(side = BOTTOM)
+
+def change_color(bar,color):
     """
         Suggested for changing the color in real time, but does not work the way I want it to. 
     """
-    window.itemconfig(bar, fill='black')
+    window.itemconfig(bar, fill=color)
+
 
 def Swap(main_list,x,y):
     """
@@ -35,6 +47,7 @@ def Swap(main_list,x,y):
 
 
 def animation(min,i):
+
     """
         Main animation function, uses x,y, barwidth to create the bars while 
         deleting all of the pre-drawn bars to create new ones where they are supposed to be. 
@@ -43,22 +56,32 @@ def animation(min,i):
     barwidth=5
     window.delete(ALL)
     min = min
+    num = enter.get()
+    
     i = i
+    
     for item in main_list:
-        if item == min:
-            bar = window.create_rectangle(x,y,x+barwidth,y-(item*15),fill="red")
+        
+        #Actual Sort... This took way too long to think about. 
+        if num == str(item):
+            sbar = window.create_rectangle(x,y,x+barwidth,y-(item*15), fill = "pink")
+        elif item == min:
+            bar = window.create_rectangle(x,y,x+barwidth,y-(item*15),fill = "red")
         else:
-            bar = window.create_rectangle(x,y,x+barwidth,y-(item*15),fill="black")
+            bar = window.create_rectangle(x,y,x+barwidth,y-(item*15),fill = "black")
         x+=barwidth+5
     
-    root.after(250, change_color(bar))
+    root.after(250, change_color(bar,"black"))
+    
     window.update()
 
 def Selection(main_list):
+    
     """
         This is the main functio for swapping and showing the bars moving, calls anmation(that creates bars) 
         and also calls swap. 
     """
+
     for i in range(len(main_list)):
         min=i
 
@@ -69,20 +92,6 @@ def Selection(main_list):
         animation(main_list[min], main_list[i])
         Swap(main_list,min,i)
 
-def Search_button(event):
-    print(search_num.get())
-
-def Search(main_list):
-    label_string = StringVar()
-    label_string.set("Enter value ")
-    
-    search_num = Entry(frame,text = label_string)
-    button = Button(root, text="Start Search")
-    search_num.pack()
-    button.pack()
-    button.bind("<ButtonPress-1>", Search_button)
-    label_string.set(search_num.get())
-    print(search_num.get())
 
 # &&  Generate random heights  && ##
 main_list = []    
@@ -92,11 +101,8 @@ for i in range(100):
     main_list.append(random_num)
 
 
+print(f"Here is the list for easy look at search: \n{main_list}")
 
-if __name__ == "__main__":  
-    Selection(main_list)
-    end = Message(frame, text= "All done",width= 100, relief= RAISED, background="lightgreen")
-    end.pack()
-    Search(main_list)
-    root.mainloop()
 
+
+root.mainloop()
