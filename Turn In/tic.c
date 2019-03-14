@@ -10,14 +10,18 @@ void main(){
     /* tic is the board (1 dimensional), place is 
     equivalent to position. x,y are all for counting
     */
+    int playing = 1;
     char tic[9];
     char place;
     int x,y,i;
+    
+    while(playing == 1){
+    
     /*
     will stay true b/c of exit_the_game function which will end 
     the program when user says so. 
     */
-    while(true){
+    
         for(i=0;i<9;i++){
             tic[i]=' ';
         }
@@ -80,50 +84,30 @@ void main(){
                 if( tic[count+0] == tic[count+1] && tic[count+1] ==tic[count+2] \
                 && tic[count+0]==place){
                     printf("%c's have won \n\n",place);
-                    exit_the_game();
+                    i = 12;
                 }
                 else if(tic[j+0]==tic[j+3]&& tic[j+3]==tic[j+6]&&tic[j+0]==place){
                     printf("%c's have won \n\n",place);
-                    exit_the_game();
+                    i = 12;
                 }
                 count+=3;
         }
         //diagonal win logic
         if(tic[0]==tic[4]&&tic[4]==tic[8]&&tic[0]==place){
             printf("%c's have won!!!\n",place);
-            exit_the_game();
+            i =12;
         }
         if(tic[6]==tic[4]&&tic[4]==tic[2]&&tic[6]==place){
             printf("%c's have won!!!\n",place);
-            exit_the_game();
-        }
-        }
+            i = 12;
         }
         
-
+        }
+        printf("Would you like to play again? [y=1,n=0]\n\n::  ");
+        getchar();
+        scanf("%d",&playing);
+        
     }
-
-int exit_the_game()
-// Function to end the game
-{
-    char exiting;
-    printf("\n\n Would you like to exit [y/n] \n :::  ");
-    getchar();
-
-    scanf("%c",&exiting);
- 
-    toupper(exiting);
-    // So it doesnt print this, but for some reason is required 
-    // for exiting. 
-    printf("%s",exiting);
-
-    if(strcmp(&exiting, "Y") == 0)
-    {
-        exit(0);
-    }
-
-    return 0;
-    
 }
 
 

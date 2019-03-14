@@ -99,7 +99,7 @@ def Selection(main_list):
 main_list = []    
 for i in range(100):
     random_ = random.randint(1,5)
-    random_num = random.randint(0,60)*(10/random_)/20 +(2)
+    random_num = random.randint(0,60)*(10//random_)//20 +(2)
     int(random_num)
 
     main_list.append(random_num)

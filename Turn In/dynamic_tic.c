@@ -5,21 +5,16 @@
 #include <stdbool.h>
 
 int check_win(char *tic,char place,int i);
-int exit_the_game(char*(tic));
-//for exiting the game, yes I did copy it from the last one
 void print_stats(char*(tic));
 
-void main(){
+int main(void){
     char* tic;
     char place;
     int x,y,i,position;
-    char replay = 'y';
-    unsigned ex_state = 1;
+    int replay = 1;
+    int j;
 
-
-    while(replay != 'n'){
-
-        do{
+    while(replay == 1){
 
         //create allocation for the size of 9 
         tic = calloc(9, sizeof(char));
@@ -60,15 +55,16 @@ void main(){
                 i--;//error checking
             }
             print_stats((tic));
-            ex_state = check_win((tic),place,i);
+            j = check_win((tic),place,i);
+            if(j ==15) {
+                i = 12;
+            }
 
         }
-        }while(ex_state == 1);
             
-            printf("Would you like to play again?");
+            printf("Would you like to play again? [y=1, n = 0]\n\n ::");
+            scanf("%d",&replay);
             
-            scanf("%c",&replay);
-            getchar();
 }}
 void print_stats(char*(tic)){
     /* Prints the stats of the game */
@@ -93,43 +89,29 @@ int check_win(char *tic,char place,int i){
             if( tic[count+0] == tic[count+1] && tic[count+1] ==tic[count+2] \
             && tic[count+0]==place){
                 printf("%c's have won \n\n",place);
-                
-                return 26;
+                free((tic));
+                i = 15;
+                return i;
             }
             else if(tic[j+0]==tic[j+3]&& tic[j+3]==tic[j+6]&&tic[j+0]==place){
                 printf("%c's have won \n\n",place);
-                return 26;
+                free((tic));
+                i = 15;
+                return i;
             }
             count+=3;
     }
     //diagonal win logic
     if(tic[0]==tic[4]&&tic[4]==tic[8]&&tic[0]==place){
         printf("%c's have won!!!\n",place);
-        return 26;
-        
+        free((tic));
+        i = 15;
+        return i;
     }
     if(tic[6]==tic[4]&&tic[4]==tic[2]&&tic[6]==place){
         printf("%c's have won!!!\n",place);
-        return 26;
+        free((tic));
+        i = 15;
+        return i;
     }
-}
-int exit_the_game(char*(tic))
-// Function to end the game
-{
-    char exiting;
-    printf("\n\n Would you like to exit [y/n] \n :::  ");
-    getchar();//buffer eater
-    exiting = getchar();
-    //scanf("%c",&exiting);
-    // So it doesnt print this, but for some reason is required 
-    // for exiting. 
-    printf("%s",exiting);
-
-    if(strcmp(&exiting, "Y") == 0)
-    {
-        free(tic);
-        (exit(0));
-
-    }
-    return 0;  
 }
