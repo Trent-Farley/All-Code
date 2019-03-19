@@ -41,7 +41,7 @@ button = tk.Button(controls_pane, text="Start search", command=button_clicked).g
 
 #make some shapes
 rect_list = []
-for index in range(10):
+for index in range(100):
     coords = 20 + (50 * index), rand.randint(10, 99), 50 + (50 * index), 100
     rect_list.append(graph.create_rectangle(coords, fill='yellow'))
     #easy way...

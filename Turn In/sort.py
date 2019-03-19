@@ -1,9 +1,12 @@
+from tkinter import Tk,Canvas,ALL,Label,Button, Frame, TOP, Message, RAISED, Entry, \
+StringVar, Event, Misc
+import time
 import random
 import time
 from tkinter import (ALL, LEFT, RAISED, TOP, Button, Canvas, Entry, Event,
                      Frame, Label, Message, StringVar, Tk,BOTTOM)
 
-global main_list
+                     
 global enter
 root=Tk()
 root.geometry(newGeometry="1250x600")
@@ -90,12 +93,13 @@ def Selection(main_list):
         animation(main_list[min], main_list[i])
         Swap(main_list,min,i)
 
-
 # &&  Generate random heights  && ##
 main_list = []    
 for i in range(100):
     random_ = random.randint(1,5)
-    random_num = random.randint(0,60)*(10/random_)/20 +(2)
+    random_num = random.randint(0,60)*(10//random_)//20 +(2)
+    int(random_num)
+
     main_list.append(random_num)
 
 print(f"Here is the list for easy look at search: \n{main_list}")

@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-int exit_the_game();
 //for exiting the game, yes I did copy it from the last one
 void print_stats(char tic[3][3]);
 // finally put the board printing into its own function
@@ -15,9 +14,11 @@ void main(){
     char tic[3][3];
     char place;
     int x,y,i;
+    int don;
+    int playing = 1;
     // tic is a 2 dimensional array, place is postion and x,y,i are 
     // counting variables.
-    while(true){
+    while(playing == 1){
         //creation of the two dimmensional array.
         for(i=0;i<3;i++){
             tic[i][0]=' ';
@@ -58,10 +59,16 @@ void main(){
             //error checking and status 
             print_stats(tic);
 
-            check_win(tic,place,i);
+            don = check_win(tic,place,i);
+            if(don ==12){
+                i = 12;
+            }
         }
     system("@cls||clear");
+    printf("Would you like to play again? [y = 1, n = 0]\n\n ::");
+    scanf("%d",&playing);
     }
+
 }
 
 void print_stats(char tic[3][3]){
@@ -86,40 +93,21 @@ int check_win(char tic[3][3],char place,int i){
         tic[i][1]==tic[i][2]&&\
         tic[i][0]==place){
             printf("%c's win!!!\n", place);
-            exit_the_game();
+            return 12;
         }
         else if(tic[0][i]==tic[1][i]&&\
         tic[1][i]==tic[2][i]&&\
         tic[0][i]==place){
             printf("%c's win!!!\n", place);
-            exit_the_game();
+            return 12;
         }
         }
         if(tic[0][0]==tic[1][1]&&tic[1][1]==tic[2][2]&&tic[0][0]==place){
             printf("%c's win!!!\n", place);
-            exit_the_game(); 
+            return 12; 
         }
         else if(tic[2][0]==tic[1][1]&&tic[1][1]==tic[0][2]&&tic[2][0]==place){
             printf("%c's win!!!\n", place);
-            exit_the_game();
+            return 12;
         }
-}
-int exit_the_game()
-// Function to end the game
-{
-    char exiting;
-    printf("\n\n Would you like to exit [y/n] \n :::  ");
-    getchar();//buffer eater
-    scanf("%c",&exiting);
- 
-    toupper(exiting);
-    // So it doesnt print this, but for some reason is required 
-    // for exiting. 
-    printf("%s",exiting);
-
-    if(strcmp(&exiting, "Y") == 0)
-    {
-        exit(0);
-    }
-    return 0;  
 }
