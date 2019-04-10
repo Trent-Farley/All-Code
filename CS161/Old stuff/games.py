@@ -2,12 +2,12 @@ import sys, pygame
 pygame.init()
 
 size = width, height = 1300, 650
-speed = [1, 1]
-blue = 1,255,255
+speed = [1,1]
+blue = 100,255,255
 
 screen = pygame.display.set_mode(size)
 
-ball = pygame.image.load("intro_ball.gif")
+ball = pygame.image.load("/home/trent/All-Code/CS161/Old stuff/intro_ball.gif")
 ballrect = ball.get_rect()
 
 while 1:

@@ -8,7 +8,7 @@ bg.bgcolor("light Blue")
 
 tommy = turtle.Turtle()
 tommy.shape("turtle")
-tommy.speed(75)
+tommy.speed(1)
 
 # draw lines
 tommy.penup()
