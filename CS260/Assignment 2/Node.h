@@ -4,9 +4,8 @@ struct node{
 
 };
 class linked_list{
-    private:
-        node *head, *tail;
     public:
+        node *head, *tail;
         linked_list(){
             head = nullptr;
             tail = nullptr;
@@ -37,17 +36,17 @@ class linked_list{
 
     void front(int number){
         node *temp = new node;
-        temp -> num = number;
-        temp -> next = head;
+        temp->num = number;
+        temp->next = head;
         head = temp;
     }
 
-    node *remove(node *before_del){
-        node* temp;
-        temp = before_del->next;
-        node *returned = temp;
-        before_del->next = temp->next;
-        delete temp;
-        return returned;
+    void remove(node *del){
+        node *deleted = del;
+        if(deleted!=nullptr){
+            delete deleted;
+        }
+
     }
+
 };
