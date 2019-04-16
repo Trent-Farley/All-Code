@@ -1,37 +1,62 @@
 #include <iostream>
-#include "Node.cpp"
+#include "Node.h"
 
 using std::cout;
 using std::endl;
 using std::cin;
 
+void display(node *head){
 
-//test manually constructing a linked-list of nodes
+    if(head == nullptr)
+    {
+        cout << "NULL" << endl;
+    }
+    else
+    {
+        cout << head->num << endl;
+        display(head->next);
+    }
+}
+
 int main()
 {
-	//cout << "hello?" << endl;
-	
-	Node node1;
-	node1.value = 42;
-	
-	Node node2;
-	node2.value	= 2;
-	
-	node1.next = &node2;
-	
-	Node node3;
-	cout << "&node2: " << &node2 << "  node2.value: " << node2.value << "  node2.next: " << node2.next << endl;
-	cout << "&node3: " << &node3 << "  node3.value: " << node3.value << "  node3.next: " << node3.next << endl << endl;
-	
-	cout << "node1.next: " << node1.next << "  &(*node1.next) (* and & are basically opposites of each other): " << &(*node1.next) << endl << endl;
-	
-	cout << "(*node1.next).value: " << (*node1.next).value << "  (node1.next + 1): " << (node1.next + 1) << "  (node1.next - 1): " << (node1.next - 1) << endl << endl;
-	cout << "node1.next->value: " << node1.next->value << "  (node1.next + 1): " << (node1.next + 1) << "  (node1.next - 1): " << (node1.next - 1) << endl << endl;
-	
-	cout << "sizeof(node1) (in bytes): " << sizeof(node1) << "  sizeof((short)node1.value): " << sizeof((short)node1.value) << "  sizeof(node1.next): " << sizeof(node1.next) << endl;
-    node3.value = 10;
-	
-	node2.next = &node3;
-	
-	cout << "&node1: " << &node1 << "  node1.value: " << node1.value << "  node1.next: " << node1.next << endl;
+    linked_list linked;
+    int menu, choice = 0;
+    while(menu != 0){
+        cout << "Lets make a stack!\n\
+1. Add a node\n\
+2. Display front\n\
+3. Display all nodes\n\
+4. Remove current head\n\
+5. Exit program"<<endl; 
+        cin>>choice;
+        switch (choice)
+        {
+            case 1:
+                int n_val;
+                cout<<"Please enter a value"<<endl;
+                cin>>n_val;
+                linked.add_nodes(n_val);
+                cout<<"Got it current stack is:"<<endl;
+                display(linked.get_head());
+                break;
+            
+            case 2:
+                cout<<"Here is the current head"<<endl;
+                cout<<linked.get_head()<<endl;
+                break;
+            
+            case 3:
+                display(linked.get_head());
+                break;
+            
+            case 4:
+                node *returned = linked.remove(linked.get_head());
+                cout<<"Head removed, but the value has been popped:\n\
+                value of head: "<< returned <<endl;
+                break;
+
+        }
+    }
+    return 0;
 }
