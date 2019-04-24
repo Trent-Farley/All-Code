@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Node.h"// Struct for node, and class for a linked list. 
+#include "../use/Node.hpp"// Struct for node, and class for a linked list. 
 
 using std::cout;
 using std::endl;
@@ -16,14 +16,14 @@ void display(node *head){// Display the current stack
         cout << head->num << endl;
         display(head->next);
     }
-}
+}//Big O(n)
 
 int main()
 {
     linked_list linked;//Create class linked
     int menu = 0;//Variables for while loop
     int choice = 0;
-    while(menu == 0){
+    while(menu == 0){//O(n)
         cout << "Lets make a stack!\n\
 1. Add a node\n\
 2. Display front\n\
