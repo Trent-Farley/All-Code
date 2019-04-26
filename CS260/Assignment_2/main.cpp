@@ -11,9 +11,6 @@ void show(node *head){// Display the current stack
     {
         cout << "NULL" << endl;
     }
-    else if(head->num== 0){
-        cout<< "" <<endl;
-    }
     else
     {
         cout << head->num << endl;
@@ -26,7 +23,7 @@ int main()
     linked_list linked;//Create class linked
     int menu = 0;//Variables for while loop
     int choice = 0;
-    while(menu == 0){
+    while(menu == 0){//O(n)
         cout << "Lets make a stack!\n\
 1. Add a node\n\
 2. Display front\n\
@@ -69,7 +66,8 @@ int main()
             else{
                 cout<<"Head removed, but the value has been popped:\n\
 Value = "<< val->num <<endl;
-
+                node*pop_val = new node;
+                pop_val = val;
                 linked.remove(val);//I have worked on this for way too
                 //long, for some reason I keep on getting a segmentation fault
                 // If I try and delete a value

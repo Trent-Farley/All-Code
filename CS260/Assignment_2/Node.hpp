@@ -42,9 +42,11 @@ class linked_list{
     }
 
     void remove(node *del){
-        node *deleted = del;
-        if(deleted!=nullptr){
-            delete deleted;
+        node* temp = del;
+
+        if(del != nullptr){
+            delete del;
+            head = temp->next;
         }
 
     }
