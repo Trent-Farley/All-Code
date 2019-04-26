@@ -11,6 +11,9 @@ void show(node *head){// Display the current stack
     {
         cout << "NULL" << endl;
     }
+    else if(head->num== 0){
+        cout<< "" <<endl;
+    }
     else
     {
         cout << head->num << endl;
