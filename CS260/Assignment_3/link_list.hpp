@@ -51,6 +51,4 @@ class linked_list{
 
     }
 
-
-
 };
