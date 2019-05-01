@@ -1,6 +1,6 @@
 struct node{
     int val;
-    node *next;
+    struct node *next;
 
 };
 class linked_list{

@@ -2,25 +2,19 @@
 #include "./link_list.hpp"
 using std::cout;
 using std::endl; 
-void show(node *head){// Display the current stack
-
-    if(head == nullptr)
-    {
-        cout << "NULL" << endl;
-    }
-    else
-    {
-        cout << head->val << endl;
-        show(head->next);
-    }
-}
+void show(struct node* head) 
+{ 
+    while (head != nullptr) { 
+        cout << " " << head->val; 
+        head = head->next; 
+    } 
+    cout << endl; 
+} 
 int main(){
     linked_list list;
   
-    for(int i=0; i<5; i++){
-        list.create(i);
-    }
-
+    node* test = list.create(5);
+    cout<<test->val<<endl;
     show(list.get_head());
 
 
