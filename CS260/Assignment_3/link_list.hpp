@@ -1,11 +1,12 @@
 struct node{
-    int num;
+    int val;
     node *next;
 
 };
 class linked_list{
     public:
         node *head, *tail;
+        int size = 0;
         linked_list(){
             head = nullptr;
             tail = nullptr;
@@ -13,22 +14,35 @@ class linked_list{
         
         void add_nodes();
         void front();
+    
+    node *create(int value){
+        node *new_node = new node;
+        new_node->val = value;
+        new_node->next = nullptr;
+        return new_node;
+    }
 
-    void add_nodes(int number){
-
-        node *temp = new node;
-        temp->num = number;
-        temp->next = nullptr;
-
-        if(head == nullptr){
-            head = temp;
-            tail = temp;
+    int insert_pos(node **curr, int pos,int data){
+        if(pos < 1 || pos>size +1 ){
+            return 10;
         }
-        else {
-            tail->next = temp;
-            tail = tail->next;
+        else{
+
+            while(pos--){
+                if(pos == 0){
+                    node *temp = create(data);
+                    temp->next = *curr;
+                    *curr = temp;
+                }
+                else{
+                    curr = &(*curr)->next;
+                }
+            }
+            size++;
         }
     }
+
+   
 
     node *get_head(){
         return head;
@@ -36,7 +50,7 @@ class linked_list{
 
     void front(int number){
         node *temp = new node;
-        temp->num = number;
+        temp->val = number;
         temp->next = head;
         head = temp;
     }

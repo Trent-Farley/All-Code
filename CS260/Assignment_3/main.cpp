@@ -1,5 +1,5 @@
 #include <iostream>
-#include "link_list.hpp"
+#include "./link_list.hpp"
 using std::cout;
 using std::endl; 
 void show(node *head){// Display the current stack
@@ -10,16 +10,17 @@ void show(node *head){// Display the current stack
     }
     else
     {
-        cout << head->num << endl;
+        cout << head->val << endl;
         show(head->next);
     }
 }
 int main(){
     linked_list list;
-    for(int i; i<5; i++){
-        list.add_nodes(i,i+2);
+  
+    for(int i=0; i<5; i++){
+        list.create(i);
     }
-    list.add_nodes(10, 2);
+
     show(list.get_head());
 
 
