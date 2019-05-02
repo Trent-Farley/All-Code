@@ -1,7 +1,7 @@
 struct node{
     int val;
     struct node *next;
-
+    
 };
 class linked_list{
     public:
@@ -12,9 +12,6 @@ class linked_list{
             tail = nullptr;
         }
         
-        void add_nodes();
-        void front();
-    
     node *create(int value){
         node *new_node = new node;
         new_node->val = value;
@@ -44,25 +41,44 @@ class linked_list{
 
    
 
-    node *get_head(){
-        return head;
-    }
-
-    void front(int number){
-        node *temp = new node;
-        temp->val = number;
-        temp->next = head;
-        head = temp;
-    }
-
-    void remove(node *del){
-        node* temp = del;
-
-        if(del != nullptr){
-            delete del;
-            head = temp->next;
+    int get_val(node *curr, int pos){
+        if(pos < 1 || pos>size +1 ){
+            return 10;
         }
+        while(pos--){
+            if(pos==0){
+                return curr->val;
+            }
+            else{
+                curr = curr->next;
+            }
+        }
+    }
 
+    int remove(node *curr, int pos){
+        if(pos < 1 || pos>size +1 ){
+            return 10;
+        }
+        else{
+            while(pos!=1){
+                pos--;
+                if(pos == 1){
+                        
+                        node *temp = new node;
+                        temp = curr->next;
+                        curr->next = curr->next->next;
+                        int returned = curr->val;
+                        
+                        delete temp;
+                        return returned;
+                    
+                }
+                else{
+                    curr = curr->next;
+                }
+            }
+            size--;
+        }
     }
 
 };

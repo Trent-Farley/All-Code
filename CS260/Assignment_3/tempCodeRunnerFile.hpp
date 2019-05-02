@@ -1,2 +1,4 @@
-            // tail->next = temp;
-            // tail = tail->next;
+                node *temp = curr;
+                curr->next= curr;
+                return temp;
+            
