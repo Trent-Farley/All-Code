@@ -11,11 +11,11 @@ int main()
   
     // Add elements to the List 
     for(int i = 0; i<10; i++){
-    demoList.push_back(10+i); 
-    demoList.push_back(20+i); 
-    demoList.push_back(30+i); 
-    demoList.push_back(40+i); 
-    demoList.push_front(10+i);
+        demoList.push_back(10+i); 
+        demoList.push_back(20+i); 
+        demoList.push_back(30+i); 
+        demoList.push_back(40+i); 
+        demoList.push_front(10+i);
     
     }
     // getting size of the list 
