@@ -3,9 +3,10 @@
 using std::cout;
 using std::endl; 
 linked_list list;
+//Show the current list, all in one line. That took a few seconds to 
+//think about 
 void show(struct node* head) {
-    //Show the current list, all in one line. That took a few seconds to 
-    //think about  
+ 
     while (head!=nullptr) { 
         cout << "->" << head->val; 
         head = head->next; 
@@ -69,7 +70,7 @@ void all_tests(){
     getchar();
     t_show_pos();
 }
-//Opposite of what  Ijust did
+
 void bad_create(){
     for(int i=20; i<22; i++){
         int bad_num = list.insert_pos(&list.head,i,i);    
@@ -120,6 +121,7 @@ void bad_pos(){
     
     }
 }
+//One to rule all the bad tests
 void bad_tests(){
     bad_create();
     cout<<"Press any key to run next test"<<endl;
