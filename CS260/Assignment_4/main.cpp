@@ -5,12 +5,13 @@ using std::endl;
 
 int main(){
 
+    
     Array array;
-    array.sized = 10;
     for(int i = 0; i<10; i++){
-        array.data = i;
-        cout<<array.arr[i];
+        array.create(i);
+
     }
+    cout<<array.arr[1];
     cout<<endl;
 
 }
