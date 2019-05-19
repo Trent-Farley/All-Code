@@ -1,3 +1,8 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 struct node{
     int val;
     struct node *next;
@@ -21,70 +26,37 @@ class linked_list{
         return new_node;
     }
 
-    int insert_pos(node **curr,int data){
-        //double node pointer to point to the next next imstead of 
-        // using a prev. Pointer to a pointer, which will justskim over 
-        //everything
-        int pos = data+1; 
-        if(pos < 1 || pos>size +1 ){
-            return 10;
+    node *insert(node *curr, int value){
+        //int pos = value+1; 
+
+        /*if(pos < 1 || pos>size +1 ){
+            return 44;
+        }
+        */
+       if(head == nullptr){
+                cout << "nullptr, value entered: " << value << endl;
+                node *temp = create(value);
+                temp->next = curr;
+                head = temp;
+                return curr;     
         }
         else{
-
-            while(pos--){
-                
-                if(pos == 0){
-                    node *temp = create(data);
-                    temp->next = *curr;
-                    *curr = temp;
+            while(true){
+                if(curr == nullptr){
+                    cout << "end of list...";
+                    return curr;
                 }
-                else{
-                    curr = &(*curr)->next;
-                }
-            }
-            size++;
-        }
-    }
-
-   
-
-    int get_val(node *curr, int pos){
-
-        if(pos < 1 || pos>size +1 ){
-            return 10;
-        }
-        while(pos--){
-            if(pos==0){
-                return curr->val;
-            }
-            else{
-                curr = curr->next;
-            }
-        }
-    }
-
-    int remove(node *curr, int pos){
-        if(pos < 1 || pos>size +1 ){
-            return 10;
-        }
-        else{
-            while(pos!=1){
-                pos--;
-                if(pos == 1){
-                        
-                        node *temp = new node;
-                        temp = curr->next;
-                        curr->next = curr->next->next;
-                        int returned = curr->val;
-                        delete temp;
-                        return returned;
-                    
+                else if(curr != nullptr && curr->val > value){
+                    node *temp = create(value);
+                    temp->next = curr;
+                    curr = temp;
+                    return curr;
                 }
                 else{
                     curr = curr->next;
                 }
             }
-            size--;
+                size++;
         }
     }
 

@@ -14,14 +14,22 @@ void show(struct node* head) {
 } 
 int main(){
     linked_list list;
-    for(int i = 0; i<12; i++){
-        list.insert_pos(&list.head,i);
+    
+     node *head = list.insert(list.head, 0);
+     head = list.insert(list.head, 1);
+
+    /*for(int i = 0; i<12; i++){ 
+       
+        list.insert(head, i);
+        
     }
+    */
+    
     show(list.head);
-    cout<<endl;
-    for(int i = 3; i<6; i++){
-        list.insert_pos(&list.head,i);
-        show(list.head);
-    }
-    show(list.head);
+    //cout<<endl;
+    // for(int i = 3; i<6; i++){
+    //     list.insert(list.head, i);
+    //     //show(list.head);
+    // }
+    // show(list.head);
 }
