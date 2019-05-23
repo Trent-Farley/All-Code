@@ -1,3 +1,8 @@
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
 struct node{
     int val;
     struct node *next;
@@ -16,6 +21,29 @@ class linked_list{
             head->next = tail;
             tail->prev = head; 
         }
+    void show() {
+        node *pointer;
+        if(head->next == nullptr){
+            cout<<"Empty as my soul"<<endl;
+        }
+        else{
+            pointer = head->next;
+            for(int i= 0; i<size; i++){
+                cout<<pointer->val<<endl;
+                if(pointer->next){
+                    pointer = pointer->next;
+            }
+            }
+        }
+        // while (size>0) { 
+        //     cout << "->" << curr->val; 
+        //     curr = curr->next; 
+        //     size--;
+        // } 
+        // cout << endl; 
+    
+
+} 
         
     node *create(int value){
         node *new_node = new node;
@@ -30,15 +58,16 @@ class linked_list{
         node *new_node = create(data);
         node *curr;
         curr = head;
-        if(head->next == tail){
+        if(size == 0){
             head->next = new_node;
             new_node ->prev = head;
             new_node->next = tail; 
             tail->prev = new_node;
+            size++;
+            return size;
         }
         else{
-            while{i<size+1){
-                
+            while(i<size){
                 
                 if(new_node->val <= curr->next->val){
                     new_node->next = curr->next;
@@ -74,29 +103,28 @@ class linked_list{
         }
     }
 
-    int remove(node *curr, int pos){
-        if(pos < 1 || pos>size +1 ){
-            return 10;
-        }
-        else{
-            while(pos!=1){
-                pos--;
-                if(pos == 1){
-                        
-                        node *temp = new node;
-                        temp = curr->next;
-                        curr->next = curr->next->next;
-                        int returned = curr->val;
-                        delete temp;
-                        return returned;
-                    
-                }
-                else{
-                    curr = curr->next;
-                }
-            }
-            size--;
-        }
-    }
-
+    // int remove(node *curr, int pos){
+    //     if(pos < 1 || pos>size +1 ){
+    //         return 10;
+    //     }
+    //     else{
+    //         while(true){
+    //             if(curr == nullptr){
+    //                 cout << "end of list...";
+    //                 return curr;
+    //             }
+    //             else if(curr != nullptr && curr->val > value){
+    //                 node *temp = create(value);
+    //                 temp->next = curr;
+    //                 curr = temp;
+    //                 return curr;
+    //             }
+    //             else{
+    //                 curr = curr->next;
+    //             }
+    //         }
+    //             size++;
+    //     }
+    // }
+    
 };

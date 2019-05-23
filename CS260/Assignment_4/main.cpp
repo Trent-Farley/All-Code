@@ -2,18 +2,18 @@
 #include <iostream>
 using std::cout;
 using std::endl;
-void show(struct node* head) {
- 
-    while (head!=nullptr) { 
-        cout << "->" << head->val; 
-        head = head->next; 
-    } 
-    cout << endl; 
-    
 
-} 
+
 int main(){
+
     linked_list list;
-    cout<<"This has problems"<<endl;
+    list.insert(10);
+    list.show();
+    
+    cout<<list.head<<endl;
+    cout<<list.tail<<endl;
+    cout<<list.head->next<<endl;
+    cout<<list.tail->prev<<endl;
+    return 0;
     
 }

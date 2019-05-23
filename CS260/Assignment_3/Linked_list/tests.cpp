@@ -60,13 +60,13 @@ void t_show_pos(){
 //One to rule all the good ones.
 void all_tests(){
     test_create();
-    cout<<"Press any key to run next test"<<endl;
+    cout<<"Press enter to run next test"<<endl;
     getchar();
     test_pos();
-    cout<<"Press any key to run next test"<<endl;
+    cout<<"Press enter to run next test"<<endl;
     getchar();
     test_rem();
-    cout<<"Press any key to run next test"<<endl;
+    cout<<"Press enter to run next test"<<endl;
     getchar();
     t_show_pos();
 }
@@ -124,10 +124,10 @@ void bad_pos(){
 //One to rule all the bad tests
 void bad_tests(){
     bad_create();
-    cout<<"Press any key to run next test"<<endl;
+    cout<<"Press enter to run next test"<<endl;
     getchar();
     bad_rem();
-    cout<<"Press any key to run next test"<<endl;
+    cout<<"Press enter to run next test"<<endl;
     getchar();
     bad_pos();
     cout<<"Everything has been tested"<<endl;
