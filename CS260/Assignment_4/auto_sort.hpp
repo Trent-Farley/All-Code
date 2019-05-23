@@ -16,8 +16,10 @@ class linked_list{
         node *head, *tail;
         int size = 0;
         linked_list(){
-            node *head = new node;//Creating blank node
-            node *tail = new node;//Blank tail node
+            head = new node;//Creating blank node
+            head->val = -1; //not necessary?
+            tail = new node;//Blank tail node
+            head->val = -2; //not necessary?
             head->next = tail;
             tail->prev = head; 
         }
@@ -32,7 +34,7 @@ class linked_list{
                 cout<<pointer->val<<endl;
                 if(pointer->next){
                     pointer = pointer->next;
-            }
+                }
             }
         }
         // while (size>0) { 
@@ -54,27 +56,27 @@ class linked_list{
     }
 
     int insert(int data){
-        int i = 0; 
+        int i = 0;
         node *new_node = create(data);
         node *curr;
         curr = head;
         if(size == 0){
             head->next = new_node;
-            new_node ->prev = head;
-            new_node->next = tail; 
+            new_node->prev = head;
+            new_node->next = tail;
             tail->prev = new_node;
             size++;
             return size;
         }
         else{
-            while(i<size){
+            while(i<=size){
                 
-                if(new_node->val <= curr->next->val){
+                if(new_node->val <= curr->next->val || i == size){
                     new_node->next = curr->next;
                     new_node->prev = curr; 
                     curr->next->prev = new_node;
                     curr->next = new_node;
-                    
+                    break;        
                 }
 
                 else{
