@@ -23,29 +23,6 @@ class linked_list{
             head->next = tail;
             tail->prev = head; 
         }
-    void show() {
-        node *pointer;
-        if(head->next == nullptr){
-            cout<<"Empty as my soul"<<endl;
-        }
-        else{
-            pointer = head->next;
-            for(int i= 0; i<size; i++){
-                cout<<pointer->val<<endl;
-                if(pointer->next){
-                    pointer = pointer->next;
-                }
-            }
-        }
-        // while (size>0) { 
-        //     cout << "->" << curr->val; 
-        //     curr = curr->next; 
-        //     size--;
-        // } 
-        // cout << endl; 
-    
-
-} 
         
     node *create(int value){
         node *new_node = new node;
@@ -90,43 +67,53 @@ class linked_list{
     return size++;
 }
 
-    int get_val(node *curr, int pos){
-
-        if(pos < 1 || pos>size +1 ){
-            return 10;
-        }
-        while(pos--){
-            if(pos==0){
+    int get_val(int val){
+        node *curr = head;
+        
+        while(size--){
+            if(curr->val){
                 return curr->val;
             }
             else{
                 curr = curr->next;
             }
         }
+        return 2;
     }
 
-    // int remove(node *curr, int pos){
-    //     if(pos < 1 || pos>size +1 ){
-    //         return 10;
-    //     }
-    //     else{
-    //         while(true){
-    //             if(curr == nullptr){
-    //                 cout << "end of list...";
-    //                 return curr;
-    //             }
-    //             else if(curr != nullptr && curr->val > value){
-    //                 node *temp = create(value);
-    //                 temp->next = curr;
-    //                 curr = temp;
-    //                 return curr;
-    //             }
-    //             else{
-    //                 curr = curr->next;
-    //             }
-    //         }
-    //             size++;
-    //     }
-    // }
+    int remove(int data){
+        int i = 0;
+        node *new_node = create(data);
+        node *curr;
+        curr = head;
+        if(size == 0){
+            head->next = new_node;
+            new_node->prev = head;
+            new_node->next = tail;
+            tail->prev = new_node;
+            size--;
+            return size;
+        }
+        else{
+            while(i<=size){
+                
+                if(new_node->val <= curr->next->val || i == size){
+                    new_node->next = curr->next;
+                    new_node->prev = curr; 
+                    curr->next->prev = new_node;
+                    curr->next = new_node;
+                    break;        
+                }
+
+                else{
+                    curr = curr->next;
+                }
+                i++;
+            
+            }
+            
+        }
+    return size++;
+    }
     
 };
