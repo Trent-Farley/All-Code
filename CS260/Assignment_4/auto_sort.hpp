@@ -1,7 +1,3 @@
-#include <iostream>
-
-using std::cout;
-using std::endl;
 
 struct node{
     int val;
@@ -14,7 +10,7 @@ struct node{
 class linked_list{
     public:
         node *head, *tail;
-        int size = 0;
+        int size;
         linked_list(){
             head = new node;//Creating blank node
             head->val = -1; //not necessary?
@@ -22,6 +18,7 @@ class linked_list{
             head->val = -2; //not necessary?
             head->next = tail;
             tail->prev = head; 
+            size = 0;
         }
         
     node *create(int value){
@@ -53,7 +50,8 @@ class linked_list{
                     new_node->prev = curr; 
                     curr->next->prev = new_node;
                     curr->next = new_node;
-                    break;        
+                    i=size;
+                          
                 }
 
                 else{
@@ -69,51 +67,56 @@ class linked_list{
 
     int get_val(int val){
         node *curr = head;
-        
-        while(size--){
-            if(curr->val){
-                return curr->val;
-            }
-            else{
-                curr = curr->next;
-            }
+        int i = size;
+        if(size == 0){  
+            return -1;
         }
-        return 2;
-    }
-
-    int remove(int data){
-        int i = 0;
-        node *new_node = create(data);
-        node *curr;
-        curr = head;
-        if(size == 0){
-            head->next = new_node;
-            new_node->prev = head;
-            new_node->next = tail;
-            tail->prev = new_node;
-            size--;
-            return size;
-        }
-        else{
-            while(i<=size){
-                
-                if(new_node->val <= curr->next->val || i == size){
-                    new_node->next = curr->next;
-                    new_node->prev = curr; 
-                    curr->next->prev = new_node;
-                    curr->next = new_node;
-                    break;        
+        else if(i>0){
+            while(i--){
+                if(curr->val == val){
+                    return curr->val;
                 }
-
                 else{
                     curr = curr->next;
                 }
-                i++;
-            
             }
+        }
+        else{
+            return -1;
+        }
+    }
+
+    int remove(int data){
+        
+        int i = 0;
+        node *curr;
+        curr = head;
+        if(size == 0){
+            
+            return -1;
+        }
+      
+        
+        while(i<=size){
+
+            if(curr->val==data){
+          
+                curr->prev->next = curr->next;
+                curr->next->prev = curr->prev;
+                int val = curr->val;
+                size--;
+                delete curr;
+                return val;
+
+            }
+
+            else{
+  
+                curr = curr->next;
+            }
+            i++;
             
         }
-    return size++;
     }
     
 };
