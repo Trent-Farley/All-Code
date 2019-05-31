@@ -43,11 +43,11 @@ class Hash_Table{
             int pos = data;
             node *new_node = create(data);
             node *curr;
-            curr = head;
+            curr = arr[pos];
             if(size[0] == 0){
                 head->next = new_node;
-                new_node->prev = head;
-                new_node->next = tail;
+                new_node->prev = arr[pos];
+                new_node->next = NULL;
                 tail->prev = new_node;
                 size[0] = 1;
                 return size;
@@ -60,7 +60,7 @@ class Hash_Table{
                         new_node->prev = curr; 
                         curr->next->prev = new_node;
                         curr->next = new_node;
-                        i=pos;
+                        i=pos+1;
                         
                             
                     }
@@ -77,31 +77,38 @@ class Hash_Table{
             return size;     
         }
         node **find_and_put(int val){
+            
             if(exists == false){
                 for(int i = 0; i<21; i++){
                     arr[i] = create(0);
                 }
                 arr[0]->data = 1;
                 arr[20]->data = 1;
-            }
-                
-            
                 exists = true;
-                if(val == 0){
-                    arr[val+1] = create(val);
-                    return arr;
-                }
-                if(val == arr[val]->data){
-                    linked_list(val);
+                return arr;
+
+            }   
+            else if(val == 0){
+                arr[val+1] = create(val);
+                return arr;
+            }
+            else if(arr[val]->data==0){
+                arr[val] = create(val);
+                return arr;
+            }
+            else if(val == arr[val]->data){
+                linked_list(val);
+                return arr;
+            }
+            else if(val>arr[19]->data){
+                if(arr[19]->data == 0){
+                    arr[19] = create(val);
                 }
                 else{
-                    arr[val] = create(val);
-                    return arr;
+                    linked_list(val);
                 }
+                return arr;
             }
-
-
-
             else{
                 arr[val] = create(val);
                 return arr;
