@@ -9,7 +9,9 @@ struct node{
 
 class Hash_Table{
     private:
+        //eexists automatically turns into true.
         bool exists = false;
+        //Size gets changed in the array to see hwo big a linked list is. 
         int size[20];
 
 
@@ -20,6 +22,7 @@ class Hash_Table{
 
 
     Hash_Table(){
+        //I dont know if I need any of this, but it works with it. 
         head = new node;
         tail = new node;
         head->next = NULL;
@@ -28,12 +31,14 @@ class Hash_Table{
         tail->next = NULL;
         head->data = 1;
         tail->data = 1;
-        for(int i = 0; i<21; i++){
+        for(int i = 0; i<20; i++){
             size[i] = 0;
         }
 
     }
     node *create(int val){
+        //I think I have used this function in every assignment so far, but 
+        //this just creates nodes.
         node *new_node = new node;
         new_node->next = NULL;
         new_node->prev = NULL;
@@ -42,12 +47,19 @@ class Hash_Table{
     }
 
     int *linked_list(int data){
+        //Stolen from auto sort, but changed so its "New"
         int i = 0;
         int pos = data;
+        
+        if(pos > 19){
+            pos = 19;
+        }
+        //check for boundary and fix if necessary   
+
         node *new_node = create(data);
         node *curr;
-        curr = arr[pos];
 
+        curr = arr[pos];
         if(size[pos] == 0){
             curr->next = new_node;
             new_node->prev = curr;
@@ -58,11 +70,14 @@ class Hash_Table{
         }
         else{
             while(i<=pos){
+    
                 
-                if(new_node->data <= curr->next->data || curr->next == NULL){
+                if(curr->next == NULL || new_node->data <= curr->next->data){
                     new_node->next = curr->next;
                     new_node->prev = curr;
+                    if(curr->next!=NULL){
                     curr->next->prev = new_node;
+                    }
                     curr->next = new_node;
                     i=pos+1;
                     
@@ -81,15 +96,22 @@ class Hash_Table{
 
     }
     node **find_and_put(int val){
+        //Main putting in function, just puts in value into linked list or arr
+        if(val>=19){
+            if(arr[19]->data != 0){
+                linked_list(val);
+            }
+            else{
+                arr[19] = create(val);
+            }
+            return arr;
+        }
 
-        if(exists == false){
-            int follower = 0;
-            for(int i = 0; i<21; i++){
+        else if(exists == false){
+            for(int i = 0; i<20; i++){
                 arr[i] = create(0);
             }
-            arr[0]->data = 1;
-            arr[20]->data = 1;
-
+        
             exists = true;
             if(val<20){
                 arr[val]->data = val;
@@ -109,21 +131,13 @@ class Hash_Table{
             linked_list(val);
             return arr;
         }
-        else if(val>arr[19]->data){
-            if(arr[19]->data == 0){
-                arr[19] = create(val);
-            }
-            else{
-                linked_list(val);
-            }
-            return arr;
-        }
+
         else{
             arr[val] = create(val);
             return arr;
         }
 
-        }
+    }
 
     };
 
