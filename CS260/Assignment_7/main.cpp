@@ -22,33 +22,32 @@ int main(){
     
     Hash_Table table;
     
+    
     table.find_and_put(12);
     table.find_and_put(12);
-    table.find_and_put(12);
+    table.find_and_put(10);    
     table.find_and_put(10);
-    table.find_and_put(10);
-
+    table.find_and_put(-1);
+    table.find_and_put(-6);
     table.find_and_put(20);
     table.find_and_put(20);
-
     table.find_and_put(25);
+    table.find_and_put(-3);
+    table.find_and_put(-33);
     
-    
-    node **example = table.find_and_put(0);
-    
-        
-
     
     for(int i=0; i<20; i++){
-        cout<<" << "<<example[i]->data;
-        if(example[i]->next!=NULL){
-            node *curr = example[i];
+        
+        if(table.arr[i]->next != NULL ){
+            node *curr = table.arr[i];
             while(curr != NULL){
-                cout<<endl;
-                
+                cout<<endl; 
                 cout<<curr->data<<endl;
                 curr = curr->next;
             }
+        }
+        else{
+            cout<<" << "<<table.arr[i]->data;
         }
     }
 

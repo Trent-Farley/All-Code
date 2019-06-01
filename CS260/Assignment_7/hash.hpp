@@ -51,8 +51,11 @@ class Hash_Table{
         int i = 0;
         int pos = data;
         
-        if(pos > 19){
+        if(pos > 19 ){
             pos = 19;
+        }
+        else if(pos<1){
+            pos = 1; 
         }
         //check for boundary and fix if necessary   
 
@@ -111,18 +114,28 @@ class Hash_Table{
             for(int i = 0; i<20; i++){
                 arr[i] = create(0);
             }
-        
             exists = true;
             if(val<20){
                 arr[val]->data = val;
                 return arr;
             }
+            arr[0]->data = 1;
+            arr[20]->data = 1;
 
-        }  
-        else if(val == 0){
-            arr[val+1] = create(val);
+        } 
+        else if(val<=0){
+            
+            if(arr[1]->data != 0){
+
+                linked_list(val);
+            }
+            else{
+
+                arr[1] = create(val);
+            }
             return arr;
-        }
+        } 
+
         else if(arr[val]->data==0){
             arr[val] = create(val);
             return arr;
