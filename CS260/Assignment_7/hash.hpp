@@ -48,6 +48,7 @@ class Hash_Table{
 
     int *linked_list(int data){
         //Stolen from auto sort, but changed so its "New"
+        //Thought about making a stack, but could not get it working for some reason. 
         int i = 0;
         int pos = data;
         
@@ -100,12 +101,12 @@ class Hash_Table{
     }
     node **find_and_put(int val){
         //Main putting in function, just puts in value into linked list or arr
-        if(val>=19){
-            if(arr[19]->data != 0){
+        if(val>=20){
+            if(arr[20]->data != 0){
                 linked_list(val);
             }
             else{
-                arr[19] = create(val);
+                arr[20] = create(val);
             }
             return arr;
         }
@@ -119,19 +120,18 @@ class Hash_Table{
                 arr[val]->data = val;
                 return arr;
             }
-            arr[0]->data = 1;
-            arr[20]->data = 1;
+
 
         } 
         else if(val<=0){
             
-            if(arr[1]->data != 0){
+            if(arr[0]->data != 0){
 
                 linked_list(val);
             }
             else{
 
-                arr[1] = create(val);
+                arr[0] = create(val);
             }
             return arr;
         } 
@@ -151,6 +151,26 @@ class Hash_Table{
         }
 
     }
+    bool find(int val){
+        //Returns true or false depending if the value is in the table
+        int pos = val;
+        if(val>20){
+            pos = 20;
+        }
+        else if(pos<0){
+            pos = 0;
+        }
 
+        else if(arr[pos]->data == 0){
+            return false;
+        }
+        else if(arr[pos]->data == val){
+            return true;
+        }
+        else{
+            return false; 
+        }
+        
+    }
     };
 

@@ -9,48 +9,14 @@ EDIT:
 Got it working, multiple values are stuck in a linked list. 
 
 EDIT:
-Problem with larger value, not sure what is wrong, just seg faults
-*/
+Problem with larger value, not sure what is wrong, just seg fault 
 
-#include <iostream>
-#include <cstdlib>
-#include "hash.hpp"
-using std::cout;
-using std::endl;
+June 2:
+For some reason, some tests return a seg fault. At this point, I need to move 
+on. I want to finish all the assignments.
+*/
+#include "tests.cpp"
 
 int main(){
-    
-    Hash_Table table;
-    
-    
-    table.find_and_put(12);
-    table.find_and_put(12);
-    table.find_and_put(10);    
-    table.find_and_put(10);
-    table.find_and_put(-1);
-    table.find_and_put(-6);
-    table.find_and_put(20);
-    table.find_and_put(20);
-    table.find_and_put(25);
-    table.find_and_put(-3);
-    table.find_and_put(-33);
-    
-    
-    for(int i=0; i<20; i++){
-        
-        if(table.arr[i]->next != NULL ){
-            node *curr = table.arr[i];
-            while(curr != NULL){
-                cout<<endl; 
-                cout<<curr->data<<endl;
-                curr = curr->next;
-            }
-        }
-        else{
-            cout<<" << "<<table.arr[i]->data;
-        }
-    }
-
-    cout<<endl;
-
+    all_tests();
 }
