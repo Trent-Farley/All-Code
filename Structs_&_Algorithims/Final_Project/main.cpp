@@ -1,92 +1,121 @@
-#include <stdio.h>
-#include <limits.h>
-#include <iostream>
+#include<iostream>
+#include <cstdlib>
+#include <ctime>
+using std::cout;
+using std::endl;
+
+// A structure to represent a node in the adjacency list.
+struct node{
+
+	int data;
+	struct node *link;
+};
  
-using namespace std;
+// A structure to represent list of vertexes connected to the given vertex.
+struct vertexlist{
+
+	struct node *vlisthead;
+};
  
-// Number of vertices in the graph
-#define V 5
+// A structure to maintain the graph vertexes and its connections to other vertexes.
+struct Graph{
+
+	int v;
+	struct vertexlist *vl; 
+};
  
-// A utility function to find the vertex with minimum key value, from
-// the set of vertices not yet included in MST
-int minKey(int key[], bool mstSet[])
-{
-    // Initialize min value
-    int min = INT_MAX, min_index;
+// A function to declare the graph according to the number of vertex.
+struct Graph* CreateGraph(int n){
+
+	int i;
+	struct Graph *vlist = new Graph;
+	vlist->v = n;
  
-    for (int v = 0; v < V; v++)
-    if (mstSet[v] == false && key[v] < min)
-    min = key[v], min_index = v;
+	// declare a list for n vertex.
+	vlist->vl = new vertexlist[n+1];
  
-    return min_index;
+	// Assign the head to NULL.
+	for(i = 0; i < n+1; i++){
+
+		vlist->vl[i].vlisthead = NULL;
+	}
+ 
+	return vlist;
 }
  
-// A utility function to print the constructed MST stored in parent[]
-int printMST(int parent[], int n, int graph[V][V])
-{
-    cout<<"Edge   Weight\n";
-    for (int i = 1; i < V; i++)
-        printf("%d - %d    %d \n", parent[i], i, graph[i][parent[i]]);
+// A function to create a new data node.
+struct node* NewNode(int value){
+
+	struct node *newnode = new node;
+	newnode->data = value;
+	newnode->link = NULL;
+ 
+	return newnode;
 }
  
-// Function to construct and print MST for a graph represented using adjacency
-// matrix representation
-void primMST(int graph[V][V])
-{
-    int parent[V]; // Array to store constructed MST
-    int key[V]; // Key values used to pick minimum weight edge in cut
-    bool mstSet[V]; // To represent set of vertices not yet included in MST
- 
-    // Initialize all keys as INFINITE
-    for (int i = 0; i < V; i++)
-        key[i] = INT_MAX, mstSet[i] = false;
- 
-    // Always include first 1st vertex in MST.
-    key[0] = 0; // Make key 0 so that this vertex is picked as first vertex
-    parent[0] = -1; // First node is always root of MST
- 
-    // The MST will have V vertices
-    for (int count = 0; count < V - 1; count++)
-    {
-        // Pick thd minimum key vertex from the set of vertices
-        // not yet included in MST
-        int u = minKey(key, mstSet);
- 
-        // Add the picked vertex to the MST Set
-        mstSet[u] = true;
- 
-        // Update key value and parent index of the adjacent vertices of
-        // the picked vertex. Consider only those vertices which are not yet
-        // included in MST
-        for (int v = 0; v < V; v++)
- 
-            // graph[u][v] is non zero only for adjacent vertices of m
-            // mstSet[v] is false for vertices not yet included in MST
-            // Update the key only if graph[u][v] is smaller than key[v]
-            if (graph[u][v] && mstSet[v] == false && graph[u][v] < key[v])
-                parent[v] = u, key[v] = graph[u][v];
-    }
- 
-    // print the constructed MST
-    printMST(parent, V, graph);
+// A  function to add the edge into the undirected graph.
+void InsertNode(Graph *G, int v1, int v2){
+
+	node *newnode1 = NewNode(v1);
+	node *newnode2 = NewNode(v2);
+	node *temp = new node;
+	// Since it is undirected graph, count each edge as two connection.
+	// Connection 1, v2 to v1.
+	if(G->vl[v2].vlisthead == NULL){
+
+		// If the head is null insert the node to the head.
+		G->vl[v2].vlisthead = newnode1;
+	}
+	else{
+
+		// Otherwise, add the node at the beginning.
+		newnode1->link = G->vl[v2].vlisthead;
+		G->vl[v2].vlisthead = newnode1;
+	}
+	// Connection 2, v1 to v2.
+	if(G->vl[v1].vlisthead == NULL){
+
+		// If the head is null insert the node to the head.
+		G->vl[v1].vlisthead = newnode2;
+	}
+	else{
+		// Otherwise, add the node at the beginning.
+		newnode2->link = G->vl[v1].vlisthead;
+		G->vl[v1].vlisthead = newnode2;
+	}
 }
  
-// driver program to test above function
-int main()
-{
-    /* Let us create the following graph
-     2    3
-     (0)--(1)--(2)
-     |   / \   |
-     6| 8/   \5 |7
-     | /     \ |
-     (3)-------(4)
-     9          */
-    int graph[V][V] = { { 0, 2, 0, 6, 0 }, { 2, 0, 3, 8, 5 },
-            { 0, 3, 0, 0, 7 }, { 6, 8, 0, 0, 9 }, { 0, 5, 7, 9, 0 }, };
+int main(){
+    srand(time(0));
+	int i, v, e;
+    
+	// Take the input of the number of vertex and edges the graph have.
+    v = 10 ;
+
+	struct Graph *G = CreateGraph(v);
+
+	e =  10;
+	int edge[e][2];
+    edge[0][0] = 5;
+
+	// Take the input of the adjacent vertex pairs of the given graph.
+	for(i = 0; i < e; i++){
+
+        edge[i][0] = (((rand() % 20)+1 )-(3));
+        edge[i][1] = (((rand() % 20)+1)-(3)) ;
+		InsertNode(G, edge[i][0], edge[i][1]);
+	}
  
-    // Print the solution
-    primMST(graph);
- 
-    return 0;
+	// Print the incidence list representation of the graph.
+	for(i = 0; i < v; i++)
+	{
+		cout<<"\n\tV("<<i+1<<") -> {  ";
+		while(G->vl[i+1].vlisthead != nullptr){
+
+			cout<<G->vl[i+1].vlisthead->data<<"  ";
+			G->vl[i+1].vlisthead = G->vl[i+1].vlisthead->link;
+		}
+		cout<<"}";
+        cout<<endl;
+	}
 }
