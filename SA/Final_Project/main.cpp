@@ -33,6 +33,7 @@ June 9- Spent almost all day on this, finished MST (Works good?) also cleaned ev
 		some more comments to the graph stuff. Spent probably too long having fun with random numbers,
 		feeling like im playing whack-a-mole since everytime I crush one, another pops up. I got the 
 		majority of them and if it doesn't seg fault tomorrow, itll be perfect.
+June 10- Everything is working, hopefully it will work later
 
 TIME COMPLEXITY:
 	Finding min tree and shortest route are 0(n) and getting all of the data is 0(n). I think this 
