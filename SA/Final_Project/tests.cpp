@@ -1,5 +1,5 @@
 #include "graph.hpp"
-#include "min_tree.hpp"
+#include "min_tree.cpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
