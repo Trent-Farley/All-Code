@@ -1,7 +1,0 @@
-4 This is a small
-2 test file
-1 for 
-4 you to play with.
-0
-2 The end.
-0

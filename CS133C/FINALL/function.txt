@@ -1,4 +1,0 @@
-Function in C are not even an option, you must have a main() to even
-    start coding. Functions can have different types, just like variables. THey can be 
-    an integer, so they must return a number, they can be void so they dont have to return
-    anything and they can also be a char so they return a character/string. 
