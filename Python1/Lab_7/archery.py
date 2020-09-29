@@ -7,7 +7,7 @@ Trent Farley
 """
 from graphics import *
 
-win= GraphWin("Archery", 400, 400)
+win = GraphWin("Archery", 400, 400)
 
 radius=150
 colors=["white", "black","blue","red","yellow"]
