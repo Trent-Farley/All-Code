@@ -1,6 +1,6 @@
 import turtle
 import random
-count = int(input("How many shapes?"))
+count = int(input("How many shapes? \n:: "))
 
 
 
@@ -8,12 +8,13 @@ for n in range(int(count)):
     turtle.color(random.random(),random.random(),random.random())
     turtle.begin_fill()
     for i in range(8):
-        #turtle.color(random.random(), random.random(), random.random())
         turtle.forward(60)
-        turtle.right(35)
-    turtle.right(360/count)
-    
+        turtle.right(60)
     turtle.end_fill()
+    turtle.forward(180)
+    turtle.right(count)
+    
+    
 
     
     
